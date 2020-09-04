@@ -91,49 +91,81 @@
 <li><a href="#hello-world">Hello World</a></li>
 <li><a href="#hello-sound">Hello Sound</a></li>
 <li><a href="#server-vs.-client">Server vs. Client</a></li>
+<li><a href="#synthdef">SynthDef</a></li>
+<li><a href="#programming-in-supercollider">Programming in Supercollider</a>
+<ul>
+<li><a href="#variables">Variables</a></li>
+</ul></li>
+<li><a href="#server-vs.-client---part-2">Server vs. Client - Part 2</a></li>
+<li><a href="#the-nodetree">The NodeTree</a></li>
 <li><a href="#bubbles">Bubbles</a></li>
+<li><a href="#some-supercollider-magic">Some Supercollider Magic</a></li>
 <li><a href="#quarks">Quarks</a></li>
 <li><a href="#under-the-hood">Under the Hood</a></li>
 <li><a href="#what-else">What else?</a></li>
 <li><a href="#about-me">About me</a></li>
 </ul>
 </nav>
-<p>Ever wanted to program sounds and use your skills as a developer to express yourself through sound? This tutorial aims to show you how to translate your already learned skills in Python to Supercollider, a realtime programming language for sounds and beyond. You can use this language to generate new sounds or modify existing sounds as an effect or replace it as your everyday programming language.</p>
+<p>Did you ever wanted to program sounds and use your skills as a developer to express yourself through sound? This tutorial aims to show you how to translate your already learned skills in Python to Supercollider, a realtime programming language for sounds and beyond. You can use this language to generate new sounds, modify existing sounds or replace it as your everyday programming language.</p>
 <h1 id="setup">Setup</h1>
-<p>For how to install and setup Supercollider please refer to the <a href="https://supercollider.github.io">official website</a>. We assume you have started Supercollider.</p>
+<p>For how to install and setup Supercollider please refer to the <a href="https://supercollider.github.io">official website</a>. For now, we assume you have started Supercollider.</p>
 <h1 id="hello-world">Hello World</h1>
 <p>Like every introduction into a new programming language we shall start with <em>Hello World</em></p>
 <pre class="Supercollider"><code>&quot;Hello World&quot;.postln;</code></pre>
-<p>You can run this line of code by pressing <span class="title-ref">&lt;Shfit&gt; + Enter</span> while the cursor is in the same row as the code. The <em>Post window</em> will look something like this</p>
+<p>You can run this line of code by pressing <span class="title-ref">&lt;Shfit&gt; + Enter</span> while the cursor is in the same row as the code. The <em>Post window</em> should look like this</p>
 <pre class=""><code>Hello World
 -&gt; Hello World</code></pre>
-<p>This snippet already tells us a bit of philosophy of Supercollider which in some points differs from Python:</p>
+<p>This snippet already tells us a bit of the philosophy behind Supercollider which in some points differs from Python but also has simmilarities:</p>
 <ul>
-<li><p>Supercollider is an <a href="https://en.wikipedia.org/wiki/Interpreted_language">interpreted language</a> which means that we do not need to compile our code before we run it - so much like Python. This is really helpful for experimentation for learning the language, creative coding and changing code that is already running. It is also a <a href="https://en.wikipedia.org/wiki/Dynamically_typed">dynamically typed language</a> which means you do not have to annotate (data)-types to what you are coding - so also like Python but different to e.g. Java.</p></li>
-<li><p>Instead of <code class="sourceCode python"><span class="bu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</code> where we apply the function <code class="sourceCode python"><span class="bu">print</span></code> on the string <code class="sourceCode python">Hello World</code> we call the method <code class="sc Supercollider">postln</code> of the string <code class="sc Supercollider">Hello World</code>. This will lead to some confusion if you are coming from Python but actually serves the purpose of function chaining. The reaseon why you see <span class="title-ref">Hello World</span> two times is because we printed <span class="title-ref">Hello World</span> to the console and the method <span class="title-ref">println</span> also returns the string with which it was called. Eeverything that is returned by a function is printed to the console when called, much like <code class="sourceCode python"><span class="dv">4</span><span class="op">+</span><span class="dv">6</span></code> in Python which will also return <span class="title-ref">10</span>. So if we would wanted to write a more <a href="https://en.wikipedia.org/wiki/Code_golf">code-golfed</a> approach to a Hello World in Supercollider the following would also print <em>Hello World</em> into our console by executing</p>
+<li><p>Supercollider is an <a href="https://en.wikipedia.org/wiki/Interpreted_language">interpreted language</a> which means that we do not need to compile our code before we execute it - so much like Python. This is really helpful for experimentation, creative coding and changing code that is already running. It is also a <a href="https://en.wikipedia.org/wiki/Dynamically_typed">dynamically typed language</a> which means you do not have to annotate (data)-types - so also like Python but different to e.g. Java.</p></li>
+<li><p>Instead of <code class="sourceCode python"><span class="bu">print</span>(<span class="st">&quot;Hello World&quot;</span>)</code> where we apply the function <code class="sourceCode python"><span class="bu">print</span></code> on the string <code class="sourceCode python"><span class="co">&quot;Hello World&quot;</span></code> we call the method <code class="sc Supercollider">postln</code> of the string <code class="sc Supercollider">"Hello World"</code>. This will lead to some confusion if you are coming from Python but it actually serves the purpose of <a href="https://en.wikipedia.org/wiki/Method_chaining">method chaining</a>. The reaseon why you see <span class="title-ref">Hello World</span> two times is because we printed <span class="title-ref">Hello World</span> to the console and the method <span class="title-ref">println</span> also returns the string with which it was called. Everything that is returned by a function is printed to the console when called, much like <code class="sourceCode python"><span class="dv">4</span><span class="op">+</span><span class="dv">6</span></code> in Python would also print <span class="title-ref">10</span> when executed in a <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop">REPL</a> without any variable assignement. So if we would wanted to write a more <a href="https://en.wikipedia.org/wiki/Code_golf">code-golfed</a> approach to <em>Hello World</em> in Supercollider we could also archieve this by executing</p>
 <pre class="supercollider"><code>&quot;Hello World&quot;</code></pre></li>
 </ul>
-<p>But printing <em>Hello World</em> would not convince me to learn a new language so we will start to take a look at where Supercollider shines: expressing sonic ideas.</p>
+<p>But printing <em>Hello World</em> would not convince me to learn a new language so we will start to take a look at where Supercollider shines: generating audio signal in realtime.</p>
 <h1 id="hello-sound">Hello Sound</h1>
-<p>Before we start generating sounds one should know how to stop sounds. You can always stop any audio in Supercollider by pressing <code>&lt;Comand&gt; + .</code> or <code>&lt;Alt&gt; + .</code> - <strong>remember this</strong> as you will come to the point where you messed up some audio levels and need to pull the plug. Also please check your levels before you proceed.</p>
+<p>Before we start generating sounds one should know how to stop sounds. You can always stop any audio in Supercollider by pressing <code>&lt;Comand&gt; + .</code> or <code>&lt;Alt&gt; + .</code> - <strong>remember this</strong> as you will come to the point where you need to pull the plug while experimenting with sonic signals. Also please check your levels of your audio hardware before you proceed. I would not recommend using headphones because they can damage your hearing if the volume exceeds caused by an error in the code.</p>
 <p>Before we can start generating any sounds we need to start the server which will act as a sound engine for us but more on this later. To start the server simply execute the following line.</p>
 <pre class="sc"><code>s.boot;</code></pre>
-<p>As with <em>Hello World</em>, execute the line of code by pressing <code>&lt;Ctrl&gt; + Enter</code> while the cursor is in the same line as your code.</p>
+<p>As with <em>Hello World</em>, execute the line of code by pressing <code>&lt;Command&gt; + Enter</code> while the cursor is in the same line as your code.</p>
 <p>Now we can start generating sounds by executing</p>
 <pre class="sc"><code>{SinOsc.ar}.play;</code></pre>
 <p>You should hear a sine wave with constant pitch from your left speaker. As discussed before we can stop this sound by pressing <code>&lt;Comand&gt; + .</code> or <code>&lt;Alt&gt; + .</code>.</p>
 <p>Lets dissect the line above to understand what happens.</p>
 <ul>
-<li><p><a href="https://doc.sccode.org/Classes/SinOsc.html">SinOsc</a> is a class which implements a <a href="https://en.wikipedia.org/wiki/Sine_wave">sine</a> oscillator which will generate us a signal. So what exactly is this <code class="sc Supercollider">.ar</code> method of SinOsc? <em>ar</em> stands for <em>Audio Rate</em> which means that we want to have a Sine Oscillator which is so exact that it can produce audible signals. There is also the option of <em>kr</em> which stands for <em>Control Rate</em> which we can use for signals which are non audible, but control e.g. the frequency of our SinOsc which is running at <em>audio rate</em>. One thing that is not obvious here for Python developers: <span class="title-ref">ar</span> is actually a method which is called - that is right, most of the time we can omit the function call <code>()</code> (which is available but often not necessary) in Supercollider. For now, <span class="title-ref">SinOsc.ar()</span> and <span class="title-ref">SinOsc.ar</span> are the same, although Supercollider also supports <a href="https://en.wikipedia.org/wiki/First-class_function">first class functions</a> like Python which provides the abillitly to write <a href="https://en.wikipedia.org/wiki/Functional_programming">functional code</a>. But more on this later.</p></li>
-<li><p><code class="sc Supercollider">{ }</code> is actually encapsulating <code class="sc Supercollider">SinOsc.ar</code> into a function, so what we are basically doing here in Python terms:</p>
+<li><p><a href="https://doc.sccode.org/Classes/SinOsc.html">SinOsc</a> is a Supercollider class which implements a <a href="https://en.wikipedia.org/wiki/Sine_wave">sine wave</a> oscillator. So what exactly is this <code class="sc Supercollider">.ar</code> method of SinOsc? <em>ar</em> stands for <em>Audio Rate</em> which means that we want to have a sine oscillator which is so exact that it can produce audible signals. There is also the option of <em>kr</em> which stands for <em>Control Rate</em> which we can use for signals which are non audible, but control e.g. the frequency of our SinOsc which is running at <em>audio rate</em>. The distinction in granularity is done because of resource optimisation. One thing that is not obvious here for Python developers: <span class="title-ref">ar</span> is actually a method which is called - most of the time we can omit the function call <code>()</code> (which is available but often not necessary) in Supercollider. For now, <span class="title-ref">SinOsc.ar()</span> and <span class="title-ref">SinOsc.ar</span> are the same, although Supercollider also supports <a href="https://en.wikipedia.org/wiki/First-class_function">first class functions</a> like Python which provides the abillitly to write <a href="https://en.wikipedia.org/wiki/Functional_programming">functional code</a>. But more on this later.</p></li>
+<li><p><code class="sc Supercollider">{ }</code> is actually encapsulating <code class="sc Supercollider">SinOsc.ar</code> into a function. Translated in the Python world the code snippet above would result in this Python code:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode Python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">def</span> sine():</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a> <span class="cf">return</span> SinOsc().ar()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>sine().play()</span></code></pre></div>
-<p>One could ask why we need to need the cumberstone of creating an <a href="https://en.wikipedia.org/wiki/Anonymous_function">anonymous function</a> will be called when one could call <code class="sc Supercollider">SinOsc.ar.play</code> directly. This will lead us to the basic architecture of Supercollider.</p></li>
+<p>One could ask why we need to need the cumberstone of creating and calling an <a href="https://en.wikipedia.org/wiki/Anonymous_function">anonymous function</a> when one could call <code class="sc Supercollider">SinOsc.ar.play</code> directly. This will lead us to the basic architecture of Supercollider.</p></li>
 </ul>
 <h1 id="server-vs.-client">Server vs. Client</h1>
-<p>Remember when we first executed <code class="sc Supercollider">s.boot</code> to boot the server?</p>
+<p>Remember when we first executed <code class="sc Supercollider">s.boot</code> to boot the server? The server is actually generating the sound for us and we send a message from our client (the Supercollider IDE) to the server which will then send the audio signal to the soundcard. Lets visualise what is happening.</p>
+<p><img src="plantuml-images/a3ff961852cce46596c337e21f575cae2a3d3722.svg" /></p>
+<p>This circumstance will also explain why we created an anonymous function. To know what the server has to output to the soundcard we transfer a function to the server which will return an audio signal. The <code class="sc Supercollider">play</code> method does a bit of magic: It transfers the the function to the server and tells the server to playback the function.</p>
+<p>But the problem of an anonymous function is that we can not modify it - but we may want to modify the frequency, level or any other parameter of our sound so how do we fix this problem?</p>
+<h1 id="synthdef">SynthDef</h1>
+<p>Instead of sending anonymous functions to the server we can register functions which generate sounds on the server. In Supercollider this is called a <a href="https://doc.sccode.org/Classes/SynthDef.html">SynthDef</a>. Lets write such a <em>Synth Def</em> for our example above.</p>
+<pre class="supercollider"><code>SynthDef(\sineWave, {SinOsc.ar;}).add;</code></pre>
+<p>Execute the lines above by pressing <span class="title-ref">&lt;Command / Alt&gt; + Enter</span> while the cursor is in the line of the statement.</p>
+<ul>
+<li>SynthDef registers a sound generating function under a name at the server. The first argument of the SynthDef is the name and shows that a string does not need to be encapsulated by <code class="sc Supercollider">"</code> but can be also indicated with a prepended <code>\</code>. The second argument is a signal generating function, in our case <span class="title-ref">SinOsc</span> at audio rate.</li>
+<li>After initiating the SynthDef we want to register the function at the server which we will do by executing the method <code class="sc Supercollider">add</code>. We also indicate the end of the statement with a <code class="sc Supercollider">;</code>.</li>
+</ul>
+<p>We registered the function with name <span class="title-ref">sineWave</span> on the server, but how do we start generating sounds?</p>
+<pre class="supercollider"><code>x = Synth(\sineWave);</code></pre>
+<p>Once we execute this we will immediately hear a sound. With <em>Synth</em> we can refer to a registered function at the server to invoke the server to play the signal of said function.</p>
+<p>Because we now have a reference to the playback of said function we can also terminate the sound in a programmatic way:</p>
+<pre class="supercollider"><code>x.free;</code></pre>
+<p>To put it into perspective</p>
+<p><img src="plantuml-images/0d8cf0c1dc9b51e2f3d3b429270fb33d392c03a8.svg" /></p>
+<p>It is important to understand that we send Supercollider code in form of functions to the server. The server will evaluate those functions and transpile it to C++ code via so called <a href="https://doc.sccode.org/Classes/UGen.html">UGens</a> which stands for Unit Generator. If you do something in a function which can not be translated to a UGen the server will not accept it.</p>
+<p>This all is maybe a bit theoretical but will help us understand why Supercollider sometimes acts different than Python and how you have to code.</p>
+<h1 id="programming-in-supercollider">Programming in Supercollider</h1>
+<h2 id="variables">Variables</h2>
+<h1 id="server-vs.-client---part-2">Server vs. Client - Part 2</h1>
+<h1 id="the-nodetree">The NodeTree</h1>
 <h1 id="bubbles">Bubbles</h1>
 <p>As you dig deeper into Supercollider you will find that the actual <em>Hello World</em> of Supercollider is <em>Bubbles</em> (see e.g. Examples from <a href="https://doc.sccode.org/Classes/DiskOut.html">here</a>).</p>
 <pre class="supercollider"><code>SynthDef(&quot;bubbles&quot;, { |out|
@@ -142,6 +174,8 @@
     zout = CombN.ar(SinOsc.ar(f, 0, 0.04), 0.2, 0.2, 4); // echoing sine wave
     Out.ar(out, zout)
 }).add;</code></pre>
+<h1 id="some-supercollider-magic">Some Supercollider Magic</h1>
+<p>SinOsc.ar([440, 442])</p>
 <h1 id="quarks">Quarks</h1>
 <h1 id="under-the-hood">Under the Hood</h1>
 <p>Remember when I told you that the programming language is called Supercollider? Actually Supercollider is more like a framework which includes a programming language called <em>sclang</em>.</p>
